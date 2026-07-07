@@ -1,22 +1,19 @@
 # Banglalink · Horizon Entry Point
 
-Hybrid sliced-PNG layout: the original Banglalink mockup is cut into static full-width
-image strips, with the three interactive Horizon embeds placed **between** them as real
-document-flow blocks — so each embed takes its own height and the next banner always
-starts after it (no overlap, mobile or desktop). No full-page background PNG.
+Single full-page static Banglalink PNG (`bl-empty.png`) as a fixed 390px mobile canvas,
+centered on desktop, with three interactive Horizon entry points overlaid onto the
+reserved blank rails. The PNG is the only visible app shell and is not sliced or rebuilt;
+the only interactive parts are the embeds.
 
-Flow: `section-1` (demo bar + header + hero + 150GB card + bKash title) → `HORIZON_ENTRY_1`
-(`#377585`, `cs`) → `section-2` (Daraz promo + title) → `HORIZON_ENTRY_2` (`#985860`, `rs`)
-→ `section-3` (Samsung promo + title) → `HORIZON_ENTRY_3` (`#143783`, `b4`) →
-`section-nav` (bottom nav). Single embed script loads once.
+- `HORIZON_ENTRY_1` — under **bKash Deal Room** (ep `#377585`, `cs`)
+- `HORIZON_ENTRY_2` — under **Daraz Discount Festival** (ep `#985860`, `rs`)
+- `HORIZON_ENTRY_3` — under **Samsung Stories** (ep `#143783`, `b4`)
 
-390px frame, centered on desktop, 100% width on smaller screens.
-
-No build step — plain static HTML. Vercel serves it as-is.
+Single embed script loads once. No build step — plain static HTML. Vercel serves it as-is.
 
 ## Files
-- `index.html` — the page
-- `img/` — the four static PNG slices (section-1/2/3 + section-nav)
+- `index.html` — the page (background + Horizon overlays + embed script)
+- `bl-empty.png` — the full-page app-shell background image
 
 ## Deploy to Vercel
 
