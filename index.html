@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <title>Banglalink · Horizon Entry Points</title>
+  <style>
+    html, body { margin: 0; padding: 0; background: #e9e7e2; }
+    * { box-sizing: border-box; }
+
+    .stage { min-height: 100vh; display: flex; justify-content: center; background: #e9e7e2; }
+    .canvas { position: relative; width: 430px; background: #ffffff; box-shadow: 0 0 40px rgba(0,0,0,0.12); }
+
+    /* IMAGE A — the only visible app shell: static, non-interactive */
+    .shell { display: block; width: 430px; height: 2413px; pointer-events: none; user-select: none; -webkit-user-drag: none; }
+
+    /* Interactive Horizon overlays, aligned to the reserved rails */
+    #HORIZON_ENTRY_1 { position: absolute; top: 645px;  left: 31px; right: 31px; height: 118px; overflow: hidden; z-index: 5; }
+    #HORIZON_ENTRY_2 { position: absolute; top: 1025px; left: 28px; right: 0;    height: 226px; overflow: hidden; z-index: 5; }
+    #HORIZON_ENTRY_3 { position: absolute; top: 1614px; left: 19px; right: 19px; height: 700px; overflow: hidden; z-index: 5; }
+  </style>
+</head>
+<body>
+  <div class="stage">
+    <div class="canvas">
+      <img class="shell" src="./bl-empty.png" alt="Banglalink app" draggable="false" />
+
+      <div id="HORIZON_ENTRY_1">
+        <div data-horizon-ep="#377585" data-horizon-ep-skeleton="cs"></div>
+      </div>
+
+      <div id="HORIZON_ENTRY_2">
+        <div data-horizon-ep="#985860" data-horizon-ep-skeleton="rs"></div>
+      </div>
+
+      <div id="HORIZON_ENTRY_3">
+        <div data-horizon-ep="#143783" data-horizon-ep-skeleton="b4"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Horizon embed — loads once for all three entry points -->
+  <script src="https://play.horizonexp.com/embed.js" data-horizon-ref="69359e05b62bd32a6d2ec964"></script>
+</body>
+</html>
