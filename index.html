@@ -8,35 +8,51 @@
     html, body { margin: 0; padding: 0; background: #e9e7e2; }
     * { box-sizing: border-box; }
 
-    .stage { min-height: 100vh; display: flex; justify-content: center; background: #e9e7e2; }
-    .canvas { position: relative; width: 430px; background: #ffffff; box-shadow: 0 0 40px rgba(0,0,0,0.12); }
+    .frame { max-width: 390px; margin: 0 auto; min-height: 100vh; background: #fff;
+      box-shadow: 0 0 40px rgba(0,0,0,0.12); display: flex; flex-direction: column; }
 
-    /* IMAGE A — the only visible app shell: static, non-interactive */
-    .shell { display: block; width: 430px; height: 2413px; pointer-events: none; user-select: none; -webkit-user-drag: none; }
+    /* Static PNG slices — exact visual from the original mockup */
+    .slice { display: block; width: 100%; height: auto; }
+    .slice.s2, .slice.s3 { margin-top: 14px; }   /* section spacing */
+    .slice.nav { margin-top: 20px; position: sticky; bottom: 0; z-index: 5; }
 
-    /* Interactive Horizon overlays, aligned to the reserved rails */
-    #HORIZON_ENTRY_1 { position: absolute; top: 645px;  left: 31px; right: 31px; height: 118px; overflow: hidden; z-index: 5; }
-    #HORIZON_ENTRY_2 { position: absolute; top: 1025px; left: 28px; right: 0;    height: 226px; overflow: hidden; z-index: 5; }
-    #HORIZON_ENTRY_3 { position: absolute; top: 1614px; left: 19px; right: 19px; height: 700px; overflow: hidden; z-index: 5; }
+    /* Live Horizon embeds — real blocks in the document flow */
+    .entry { width: 100%; margin-top: 4px; }
+    #HORIZON_ENTRY_1 { padding: 0 24px; }
+    #HORIZON_ENTRY_2 { padding: 0 0 0 24px; }   /* left pad only — horizontal cards run to edge */
+    #HORIZON_ENTRY_3 { padding: 0 24px; }
   </style>
 </head>
 <body>
-  <div class="stage">
-    <div class="canvas">
-      <img class="shell" src="./bl-empty.png" alt="Banglalink app" draggable="false" />
+  <div class="frame">
 
-      <div id="HORIZON_ENTRY_1">
-        <div data-horizon-ep="#377585" data-horizon-ep-skeleton="cs"></div>
-      </div>
+    <!-- Section 1: demo bar + header + hero + 150GB card + bKash Deal Room title -->
+    <img class="slice s1" src="./img/section-1.png" alt="Banglalink — bKash Deal Room" />
 
-      <div id="HORIZON_ENTRY_2">
-        <div data-horizon-ep="#985860" data-horizon-ep-skeleton="rs"></div>
-      </div>
-
-      <div id="HORIZON_ENTRY_3">
-        <div data-horizon-ep="#143783" data-horizon-ep-skeleton="b4"></div>
-      </div>
+    <!-- HORIZON_ENTRY_1 -->
+    <div class="entry" id="HORIZON_ENTRY_1">
+      <div data-horizon-ep="#377585" data-horizon-ep-skeleton="cs"></div>
     </div>
+
+    <!-- Section 2: Banglalink/Daraz promo banner + Daraz Discount Festival title -->
+    <img class="slice s2" src="./img/section-2.png" alt="Daraz Discount Festival" />
+
+    <!-- HORIZON_ENTRY_2 -->
+    <div class="entry" id="HORIZON_ENTRY_2">
+      <div data-horizon-ep="#985860" data-horizon-ep-skeleton="rs"></div>
+    </div>
+
+    <!-- Section 3: travel/Banglalink promo banner + Samsung Stories title -->
+    <img class="slice s3" src="./img/section-3.png" alt="Samsung Stories" />
+
+    <!-- HORIZON_ENTRY_3 -->
+    <div class="entry" id="HORIZON_ENTRY_3">
+      <div data-horizon-ep="#143783" data-horizon-ep-skeleton="b4"></div>
+    </div>
+
+    <!-- Section 4: bottom navigation -->
+    <img class="slice nav" src="./img/section-nav.png" alt="Bottom navigation" />
+
   </div>
 
   <!-- Horizon embed — loads once for all three entry points -->
