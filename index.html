@@ -6,10 +6,16 @@
   <title>Banglalink · Horizon Entry Points</title>
   <style>
     html, body { margin: 0; padding: 0; background: #e9e7e2; }
+    body { overflow-x: hidden; }
     * { box-sizing: border-box; }
 
     .stage { min-height: 100vh; display: flex; justify-content: center; background: #e9e7e2; }
-    .canvas { position: relative; width: 390px; background: #ffffff; box-shadow: 0 0 40px rgba(0,0,0,0.12); }
+
+    /* Scaling wrapper: reserves the scaled footprint so there's no dead space below */
+    .scaler { position: relative; width: 390px; }
+
+    /* Fixed 390px artboard — the PNG and all Horizon overlays scale together as one unit */
+    .canvas { position: relative; width: 390px; background: #ffffff; box-shadow: 0 0 40px rgba(0,0,0,0.12); transform-origin: top left; }
 
     /* Single full-page static app shell — non-interactive */
     .shell { display: block; width: 390px; height: 2189px; pointer-events: none; user-select: none; -webkit-user-drag: none; }
@@ -22,6 +28,7 @@
 </head>
 <body>
   <div class="stage">
+    <div class="scaler">
     <div class="canvas">
       <img class="shell" src="./bl-empty.png" alt="Banglalink app" draggable="false" />
 
@@ -37,7 +44,31 @@
         <div data-horizon-ep="#143783" data-horizon-ep-skeleton="b4"></div>
       </div>
     </div>
+    </div>
   </div>
+
+  <script>
+    // Treat the design as a fixed 390px-wide artboard. When the viewport is
+    // narrower than 390px, scale the whole artboard (PNG + all Horizon
+    // overlays) down proportionally so nothing overflows and the relative
+    // layout stays pixel-identical to the iPhone reference.
+    (function () {
+      var ARTBOARD_W = 390;
+      var ARTBOARD_H = 2189;
+      var scaler = document.querySelector('.scaler');
+      var canvas = document.querySelector('.canvas');
+      function fit() {
+        var scale = Math.min(1, window.innerWidth / ARTBOARD_W);
+        canvas.style.transform = 'scale(' + scale + ')';
+        // Reserve the scaled footprint so the page has no trailing blank space.
+        scaler.style.width = (ARTBOARD_W * scale) + 'px';
+        scaler.style.height = (ARTBOARD_H * scale) + 'px';
+      }
+      fit();
+      window.addEventListener('resize', fit);
+      window.addEventListener('orientationchange', fit);
+    })();
+  </script>
 
   <!-- Horizon embed — loads once for all three entry points -->
   <script src="https://play.horizonexp.com/embed.js" data-horizon-ref="69359e05b62bd32a6d2ec964"></script>
